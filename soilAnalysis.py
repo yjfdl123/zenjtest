@@ -65,8 +65,8 @@ class SoilAnalysis(object):
                         si = si + 1
                         newele = double_ele
                     if not self.soil_dict.has_key(newele):
-                        # 异常
-                        pass
+                        print 'can not recgonize ',newele
+                        raise Exception
             si = si + 1
             yield newele
 
@@ -99,7 +99,10 @@ class SoilAnalysis(object):
     def compute_soils(self,out_list):
         out_dict = {}
         for key in out_list:
-            out_dict[key] = self.compute_soil(key)
+            try:
+                out_dict[key] = self.compute_soil(key)
+            except Exception,e:
+                pass
         return out_dict
 
     def is_float(self,ele):
